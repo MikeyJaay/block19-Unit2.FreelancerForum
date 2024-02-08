@@ -1,51 +1,109 @@
-const freelancersList = document.querySelector(".freelancers");
-const averageLabel = document.querySelector("#average");
+//create new repository and clone from GitHub that contains an HTML and JS file
+//connect the script.js to index.html
+// console.log(`test`);
+//console.log the body and head of document so you can see it in console
+console.log(window.document);
+console.log(document.body);
+console.log(document.head);
+console.log(document.body.children);
+//Create a platform using JS for freelance workers to advertise services
+//using DOM elements ensure "document.querySelector is used"
+//create title named "Freelancer Forum"
 
 const freelancers = [
-  { name: "Alice", price: 30, occupation: "writer" },
-  { name: "Bob", price: 50, occupation: "teacher" },
-  { name: "Carol", price: 70, occupation: "programmer" },
+  { name: "Dr. Slice", price: 25, occupation: "gardener" },
+  { name: "Dr. Pressure", price: 51, occupation: "programmer" },
+  { name: "Prof. Possibility", price: 43, occupation: "teacher" },
+  { name: "Prof. Prism", price: 81, occupation: "teacher" },
+  { name: "Dr. Impulse", price: 43, occupation: "teacher" },
+  { name: "Prof. Spark", price: 76, occupation: "programmer" },
+  { name: "Dr. Wire", price: 47, occupation: "teacher" },
+  { name: "Prof. Goose", price: 72, occupation: "driver" },
 ];
+console.log(freelancers);
 
-const possibleNames = ["Vincent", "Torie", "Leo", "Stephanie", "Michael"];
-const possibleOccupations = ["Programmer", "Writer", "Teacher"];
+const body = document.querySelector("body");
+const title = document.createElement(`h1`);{
+  title.textContent = `Freelancer Forum`;
+};
+body.append(title);
+console.log(title);
+const priceBlock = document.querySelector("priceBlock");
 
-const maxFreelancers = 15;
 
-const addFreelancerIntervalId = setInterval(addFreelancer, 3000);
+//The average starting price is ${average price}
+const totalPrice =freelancers.reduce(
+  (acc, freelancer) =>acc + freelancer.price, 0); 
+console.log(totalPrice);
 
-function calculateAverage() {
-  const sum = freelancers.reduce((accum, freelancer) => {
-    return accum + freelancer.price;
-  }, 0);
+const avgPrice = totalPrice / freelancers.length;
+console.log(avgPrice);
 
-  return sum / freelancers.length;
-}
+//display the average starting price
+const avgPriceText = `The average starting price is $${avgPrice.toFixed(2)}`;
+console.log(avgPriceText);
+//display average price using .createElement
+const avgPriceElement = document.createElement("p");
+avgPriceElement.textContent=avgPriceText;
+body.appendChild(avgPriceElement);
+console.log(avgPriceElement);
 
-render();
+//create a second const with "Available Freelancers"
+const availFreelancers = document.createElement("section");
+body.appendChild(availFreelancers);
+console.log(availFreelancers);
 
-function render() {
-  const freelancerElements = freelancers.map((freelancer) => {
-    const element = document.createElement("li");
-    element.innerText = `${freelancer.name} ${freelancer.occupation} ${freelancer.price}`;
-    return element;
-  });
-  averageLabel.innerText = calculateAverage();
+//create a table using "th" (table headers), "td" (table data), "tr" (table row), etc
+const table = document.createElement("table");
+availFreelancers.appendChild(table);
+console.log(table);
+//create a column for "Name (bold)", "Occupation (bold)", and "Starting Price (bold)" using an array
+const tblHeaders = [ "Name", "Occupation", "Starting Price"];
+// console.log(tblHeaders);
+const tableHeaderRow = document.createElement("tr");
+//append to browser
+table.appendChild(tableHeaderRow);
+console.log(tableHeaderRow);
 
-  freelancersList.replaceChildren(...freelancerElements);
-}
+//place table header text into the table header rows
+tblHeaders.forEach((headerText) => {
+  const th = document.createElement("th");
+  th.textContent = headerText;
+  tableHeaderRow.appendChild(th);
+});
+//create rows in the table to place array items in
+//seperate the array items into individual rows
+freelancers.forEach((freelancer) => {
+  const row=document.createElement("tr");
+  table.appendChild(row);
+  console.log(row);
 
-function addFreelancer() {
-  const name = possibleNames[Math.floor(Math.random() * possibleNames.length)];
-  const occupation =
-    possibleOccupations[Math.floor(Math.random() * possibleOccupations.length)];
-  const price = Math.floor(Math.random() * 10000);
+  const nameBlock = document.createElement("td");
+  nameBlock.textContent = freelancer.name;
+  row.appendChild(nameBlock);
 
-  freelancers.push({ name, occupation, price });
+  const occBlock = document.createElement("td");
+  occBlock.textContent = freelancer.occupation;
+  row.appendChild(occBlock);
 
-  render();
+  const priceBlock = document.createElement("td");
+  priceBlock.textContent = ((`$`) + freelancer.price);
+  row.appendChild(priceBlock);
+});
+table.setAttribute("style", "border: black 5px solid; margin: 10px;" );
+// .getElementsByName("priceBlock").style.textAlign = "right";
+// document.getElementsByTagName("priceBlock").style.textAlign="right";
+body.setAttribute("style", "max-width: 300px; max-height: 375px; border: peru 10px solid; padding: 10px; margin: 15px;");
+body.h1.setAttribute("style", "text-align: center;");
 
-  if (freelancers.length === maxFreelancers) {
-    clearInterval(addFreelancerIntervalId);
-  }
-}
+
+//****upper case first letter in occupation/driving me nuts ****/
+
+//Program initializes an array of freelancers with names, occupations, and starting prices
+  //Test code
+//initial array of freelancers is rendered to the HTML page from JS
+  //Test code
+//need to create a function that determines the average price of freelanceers
+  //Test code
+//clean up code and make more readable
+  //Test code
